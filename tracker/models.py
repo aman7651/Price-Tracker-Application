@@ -7,6 +7,6 @@ class Item(models.Model):
     last_price = models.IntegerField(null=True, blank=True)
     discount_price = models.CharField(max_length=100, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
-
+    email =models.CharField(max_length =400)
     def __str__(self):
         return self.title
