@@ -54,4 +54,5 @@ def crawl_data(url):
     #title = bs.find('h1', id="itemTitle").get_text().replace("Details about", "").strip()
     #price = bs.find('span', id="prcIsum").get_text()
     #clean_price = float(price.strip().replace("US", "").replace("$", ""))
-    return {'title': title, 'last_price':clean_price }
+    return {'title': title, 'last_price': price }
+
