@@ -11,6 +11,7 @@ def tracker_view(request):
         if form.is_valid():
             url = form.cleaned_data.get('url')
             requested_price = form.cleaned_data.get('requested_price')
+            email = form.cleaned_data.get('email')
             crawled_data = crawl_data(url)
             Item.objects.create(
             url = url,
