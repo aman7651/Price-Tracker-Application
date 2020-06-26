@@ -18,6 +18,7 @@ def tracker_view(request):
             title = crawled_data['title'],
             requested_price=requested_price,
             last_price=crawled_data['last_price'],
+            email = email,
             discount_price='No Discount Yet',
             )
             return HttpResponseRedirect('')
