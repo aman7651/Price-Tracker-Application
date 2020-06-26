@@ -29,11 +29,29 @@ def tracker_view(request):
     return render(request, 'tracker.html', context)
 
 def crawl_data(url):
-    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-    html = urlopen(req).read()
-    bs = BeautifulSoup(html, 'html.parser')
+    #req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    #html = urlopen(req).read()
+    #bs = BeautifulSoup(html, 'html.parser')
+    page1 = requests.get(url).text
+    soup = BeautifulSoup(page1, 'lxml')
     
-    title = bs.find('h1', id="itemTitle").get_text().replace("Details about", "").strip()
-    price = bs.find('span', id="prcIsum").get_text()
-    clean_price = float(price.strip().replace("US", "").replace("$", ""))
+
+    title = soup.find('h1').text.strip()
+    page = requests.get(url)
+    product_name = soup.find('h1').text.strip()
+        page = requests.get(url)
+        
+        soup = BeautifulSoup(page.content,'html.parser')
+        global price
+        price = soup.find("div", {"class": "_3qQ9m1"}).text
+        price = price[1:]
+    
+    
+        price_ar = price.split(",")
+        price = ''.join(price_ar)
+    
+        price = int(price)
+    #title = bs.find('h1', id="itemTitle").get_text().replace("Details about", "").strip()
+    #price = bs.find('span', id="prcIsum").get_text()
+    #clean_price = float(price.strip().replace("US", "").replace("$", ""))
     return {'title': title, 'last_price':clean_price }
